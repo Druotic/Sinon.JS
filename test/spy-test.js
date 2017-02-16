@@ -22,6 +22,14 @@ function spyCalledTests(method) {
             assert(this.spy[method](1, 2, 3));
         });
 
+        it("returns true if spy was called with initial object that is later mutated", function () {
+            var obj = {};
+            this.spy(obj);
+            obj.foo = "bar";
+
+            assert(this.spy[method]({}));
+        });
+
         it("returns true if called with args at least once", function () {
             this.spy(1, 3, 3);
             this.spy(1, 2, 3);
